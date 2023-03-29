@@ -1,4 +1,4 @@
-# ContatcsDokumentacja techniczna
+#Dokumentacja techniczna
 
 Opis projektu
 
