@@ -1,0 +1,61 @@
+﻿@viewModel ContactsApp.ViewModels.CRUD.EditViewModel, ContactsApp
+@masterPage Views/MasterPage.dotmaster
+@import ContactsApp.Resources
+
+<dot:Content ContentPlaceHolderID="MainContent">
+
+    <div class="page-center">
+
+        <dot:RouteLink RouteName="Default" Text="Powrót" class="page-button btn-back btn-long"/>
+
+        <form class="page-box"
+              Validator.InvalidCssClass="has-error"
+              Validator.SetToolTipText="true">
+
+            <h1>{{resource: Texts.Title_Edit}}</h1>
+
+            <div Validator.Value="{value: Contact.FirstName}"
+                 class="page-input-box">
+                {{resource: Texts.Label_Firstname}}:
+                <dot:TextBox Text="{value: Contact.FirstName}" class="page-input" />
+            </div>
+
+            <div Validator.Value="{value: Contact.LastName}"
+                 class="page-input-box">
+                {{resource: Texts.Label_Lastname}}:
+                <dot:TextBox Text="{value: Contact.LastName}" class="page-input" />
+            </div>
+
+            <div Validator.Value="{value: Contact.Email}"
+                 class="page-input-box">
+                {{resource: Texts.Label_Email}}:
+                <dot:TextBox Text="{value: Contact.Email}" class="page-input" />
+            </div>
+
+            <div Validator.Value="{value: Contact.PhoneNumber}"
+                 class="page-input-box">
+                {{resource: Texts.Label_PhoneNumber}}:
+                <dot:TextBox Text="{value: Contact.PhoneNumber}" class="page-input" />
+            </div>
+
+            <div Validator.Value="{value: Contact.Category}"
+                 class="page-input-box">
+                {{resource: Texts.Label_Category}}:
+                <dot:TextBox Text="{value: Contact.Category}" class="page-input" />
+            </div>
+
+            <div Validator.Value="{value: Contact.BirthDate}"
+                 class="page-input-box">
+                {{resource: Texts.Label_BirthDate}}:
+                <dot:TextBox Text="{value: Contact.BirthDate}"
+                             ValueType="DateTime"
+                             FormatString="dd/MM/yyyy"
+                             class="page-input" />
+            </div>
+
+            <dot:Button Text="{resource: Texts.Label_Save}" Click="{command: EditContact()}" class="page-button" IsSubmitButton />
+        </form>
+    </div>
+</dot:Content>
+
+

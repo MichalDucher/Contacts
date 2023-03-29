@@ -1,0 +1,53 @@
+﻿@viewModel ContactsApp.ViewModels.CRUD.DetailViewModel, ContactsApp
+@masterPage Views/MasterPage.dotmaster
+@import ContactsApp.Resources
+
+<dot:Content ContentPlaceHolderID="MainContent">
+
+    <div class="page-center">
+
+        <dot:RouteLink RouteName="Default" Text="Lista kontaktów" class="page-button btn-back btn-long"/>
+
+        <div class="page-box">
+            <h1>{{resource: Texts.Title_Detail}}</h1>
+
+            <div class="page-input-box">
+                {{resource: Texts.Label_Firstname}}
+                <span class="input-text-only">{{value: Contact.FirstName}}</span>
+            </div>
+
+            <div class="page-input-box">
+                {{resource: Texts.Label_Lastname}}
+                <span class="input-text-only">{{value: Contact.LastName}}</span>
+            </div>
+
+            <div class="page-input-box">
+                {{resource: Texts.Label_Email}}
+                <span class="input-text-only">{{value: Contact.Email}}</span>
+            </div>
+
+            <div class="page-input-box">
+                {{resource: Texts.Label_PhoneNumber}}
+                <span class="input-text-only">{{value: Contact.PhoneNumber}}</span>
+            </div>
+
+            <div class="page-input-box">
+                {{resource: Texts.Label_Category}}
+                <span class="input-text-only">{{value: Contact.Category}}</span>
+            </div>
+
+            <div class="page-input-box">
+                {{resource: Texts.Label_BirthDate}}
+                <span class="input-text-only">
+                    <dot:Literal Text="{{value: Contact.BirthDate}}" FormatString="dd/MM/yyyy" />
+                </span>
+            </div>
+
+            <div class="btn-container">
+                <dot:RouteLink RouteName="CRUD_Edit" Param-Id="{value: Contact.Id}" Text="{resource: Texts.Label_Edit}" class="page-button" />
+                <dot:Button Click="{command: DeleteContact()}" Text="{resource: Texts.Label_Delete}" class="page-button" />
+            </div>
+        </div>
+    </div>
+</dot:Content>
+
