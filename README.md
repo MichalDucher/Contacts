@@ -1,4 +1,4 @@
-#Dokumentacja techniczna
+#Dokumentacja techniczna (Dokumentacja w lepszej formie znajduje się w pliku Dokumentacka.docx)
 
 Opis projektu
 
