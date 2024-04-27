@@ -34,6 +34,7 @@ CREATE TABLE Contacts (
     Password VARCHAR(45) NOT NULL
 );
 ```
+3. Then, run the API. In the ContactsApi project, in the appsettings.json file, there is a connection string to the database. You need to provide the server name where the database included in the project is located. After that, you can run the ContactsApp project.
 # API Endpoints
 
 | HTTP Method | Endpoint Path           | Description                                           |
