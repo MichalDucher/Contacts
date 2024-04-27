@@ -33,25 +33,26 @@ CREATE TABLE Contacts (
     BirthDate DATETIME NOT NULL,
     Password VARCHAR(45) NOT NULL
 );
+```
 # API Endpoints
 
-| HTTP Method | Endpoint Path          | Description                                       |
-|-------------|------------------------|---------------------------------------------------|
-| GET         | /api/GetContacts       | Retrieves all records from the 'Contacts' table   |
-| GET         | /api/GetContactById    | Retrieves a single record by the provided ID      |
-| POST        | /api/InsertContact     | Adds a new record                                 |
-| PUT         | /api/UpdateContact     | Updates a record with the provided ID             |
-| DELETE      | /api/DeleteContact/{Id}| Deletes a record by the provided ID               |
+| HTTP Method | Endpoint Path           | Description                                           |
+|-------------|-------------------------|-------------------------------------------------------|
+| GET         | /api/GetContacts        | Retrieves all records from the 'Contacts' table       |
+| GET         | /api/GetContactById     | Retrieves a single record by the provided ID          |
+| POST        | /api/InsertContact      | Adds a new record                                     |
+| PUT         | /api/UpdateContact      | Updates a record with the provided ID                 |
+| DELETE      | /api/DeleteContact/{Id} | Deletes a record by the provided ID                   |
 
-## API Classes
+# API Classes
 
-### Program.cs
+## Program.cs
 The main configuration file that adds controllers to handle HTTP requests and sets up the database connection.
 
-### ContactsController.cs
+## ContactsController.cs
 The class handling requests from the client-side. It provides HTTP endpoints.
 
-#### Methods:
+### Methods:
 - Constructor creating the database 'context'.
 - `public async Task<ActionResult<List<Contact>>> Get()`: Retrieves all contacts from the database and returns the result as a list.
 - `public async Task<ActionResult> GetUserById(int Id)`: Retrieves a single contact by the provided ID.
@@ -59,5 +60,56 @@ The class handling requests from the client-side. It provides HTTP endpoints.
 - `public async Task UpdateContact(Contact contact)`: Updates individual data about a single contact.
 - `public async Task DeleteContact(int Id)`: Deletes a single contact by the provided ID.
 
-### Contacts.cs
-The class representing the contact model in the application. It contains fields for FirstName, LastName, Email, PhoneNumber, Category
+## Contacts.cs
+The class representing the contact model in the application. It contains fields for FirstName, LastName, Email, PhoneNumber, Category, BirthDate, and Password.
+
+## ContactsContext.cs
+The class representing the database context in the application. It contains all information about entities and database configuration.
+
+### Methods:
+- Constructor accepting the context configuration object.
+- `protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)`: Configures the database connection.
+- `protected override void OnModelCreating(ModelBuilder modelBuilder)`: Configures the data model.
+- `partial void OnModelCreatingPartial(ModelBuilder modelBuilder)`: Partial method that can be used to configure the data model in other classes.
+
+# ContactsApp - Classes
+
+## Program.cs
+This class is the entry point and starts the application.
+
+### Methods:
+- `public static void Main(string[] args)`: Starts the WebHost.
+- `public static IWebHost BuildWebHost(string[] args)`: Creates an instance of the IWebHost class and points to the Startup.cs class as the class that configures the application.
+
+## Startup.cs
+This class represents the application configuration.
+
+### Methods:
+- `public void ConfigureServices(IServiceCollection services)`: Adds services such as AddWebEncoders, AddDbContext, and AddDotVVM.
+- `public void Configure(IApplicationBuilder app, IWebHostEnvironment env)`: Defines the HTTP pipeline and adds middleware such as UseDeveloperExceptionPage, UseExceptionHandler, UseHttpsRedirection, UseHsts, UseStaticFiles, UseRouting, UseAuthentication, and UseAuthorization.
+
+## ContactDetailModel.cs
+The class representing the model of a single contact. It contains fields for Id, FirstName, LastName, Email, PhoneNumber, Category, Password, and BirthDate.
+
+## ContactsListModel.cs
+The class representing the model of a single contact displayed in the contact list. It contains fields for Id, FirstName, and LastName.
+
+## ContactService.cs
+This class contains methods that allow interaction with the web service. The class defines four methods that connect to the API and send requests to create, edit, or delete contacts.
+
+### Methods:
+- `public async Task<List<Contact>> GetAllContacts()`: Retrieves a list of all contacts.
+- `public async Task GetContactById(int Id)`: Retrieves information about a single contact by the provided ID.
+- `public async Task UpdateContact(ContactDetailModel contact)`: Updates data about a specific contact.
+- `public async Task InsertContact(ContactDetailModel contact)`: Creates a new contact.
+- `public async Task DeleteContact(int Id)`: Deletes a contact.
+
+## CreateViewModel.cs, DetailViewModel.cs, EditViewModel.cs
+These classes inherit from the MasterPageViewModel class and define the view model for the add, edit, and detail pages of a contact.
+
+## DefaultViewModel.cs
+The class defining the main view of the page.
+
+### Methods:
+- `public DefaultViewModel(ContactService contactService)`: Constructor accepting an object of the ContactService.cs class.
+- `public override async Task PreRender()`: Retrieves a list of contacts, which is then displayed by DefaultViewModel.dothml.
