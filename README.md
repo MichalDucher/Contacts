@@ -33,3 +33,31 @@ CREATE TABLE Contacts (
     BirthDate DATETIME NOT NULL,
     Password VARCHAR(45) NOT NULL
 );
+# API Endpoints
+
+| HTTP Method | Endpoint Path          | Description                                       |
+|-------------|------------------------|---------------------------------------------------|
+| GET         | /api/GetContacts       | Retrieves all records from the 'Contacts' table   |
+| GET         | /api/GetContactById    | Retrieves a single record by the provided ID      |
+| POST        | /api/InsertContact     | Adds a new record                                 |
+| PUT         | /api/UpdateContact     | Updates a record with the provided ID             |
+| DELETE      | /api/DeleteContact/{Id}| Deletes a record by the provided ID               |
+
+## API Classes
+
+### Program.cs
+The main configuration file that adds controllers to handle HTTP requests and sets up the database connection.
+
+### ContactsController.cs
+The class handling requests from the client-side. It provides HTTP endpoints.
+
+#### Methods:
+- Constructor creating the database 'context'.
+- `public async Task<ActionResult<List<Contact>>> Get()`: Retrieves all contacts from the database and returns the result as a list.
+- `public async Task<ActionResult> GetUserById(int Id)`: Retrieves a single contact by the provided ID.
+- `public async Task InsertContact(Contact contact)`: Adds a new contact to the database.
+- `public async Task UpdateContact(Contact contact)`: Updates individual data about a single contact.
+- `public async Task DeleteContact(int Id)`: Deletes a single contact by the provided ID.
+
+### Contacts.cs
+The class representing the contact model in the application. It contains fields for FirstName, LastName, Email, PhoneNumber, Category
